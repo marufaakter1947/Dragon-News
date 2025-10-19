@@ -1,10 +1,12 @@
 import React, { use, useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../Provider/AuthProvider';
 
 const Register = () => {
     const { createUser,setUser,updateUser} = use(AuthContext)
     const [nameError,setNameError] = useState("");
+
+    const navigate = useNavigate();
     const handleRegister = (e)=>{
         
         e.preventDefault();
@@ -28,6 +30,7 @@ const Register = () => {
             const user = result.user;
             updateUser({displayName:name,photoURL: photo}).then(()=>{
  setUser({...user,displayName:name,photoURL: photo});
+ navigate("/");
             }).catch((error)=>{
                 console.log(error);
                 setUser(user);
@@ -46,12 +49,12 @@ const Register = () => {
       <form onSubmit={handleRegister} className="card-body">
         <fieldset className="fieldset">
             <label className="label">Name</label>
-          <input type="text" name='name' className="input" placeholder="Enter your name" />
+          <input type="text" name='name' className="input" placeholder="Enter your name" required/>
 
 {nameError && <p className='text-red-400 text-sm'>{nameError}</p>}
 
           <label className="label">Photo URL</label>
-          <input type="text" name='photo' className="input" placeholder="Enter your image URL" />
+          <input type="text" name='photo' className="input" placeholder="Enter your image URL" required/>
           <label className="label">Email</label>
           <input type="email" name='email' className="input" placeholder="Email" required />
           <label className="label">Password</label>
