@@ -8,6 +8,8 @@ import AuthLayout from "../Layouts/AuthLayout";
 import NewsDetails from "../Pages/NewsDetails";
 import PrivateRoute from "../Provider/PrivateRoute";
 import Loading from "../Pages/Loading";
+import About from "../Pages/About";
+import Career from "../Pages/Career";
 
  export const router = createBrowserRouter([
   {
@@ -39,6 +41,18 @@ import Loading from "../Pages/Loading";
         element:<Register></Register>
       }
     ]
+  },
+  {
+path: "/about",
+element:<About></About>
+  },
+  {
+    path: "/career",
+    element: <Career></Career>,
+  },
+  {
+    path: "/*",
+    element: <h2>Error404</h2>,
   },
   {
     path: "/news-details/:id",
